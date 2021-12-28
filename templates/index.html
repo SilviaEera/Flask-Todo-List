@@ -1,0 +1,39 @@
+{% extends 'base.html' %} 
+
+{% block head %}
+
+{% endblock %} 
+
+{% block body %} 
+<div class="content">
+    <h1>ToDo List</h1>
+    {% if tasks|length < 1 %}
+    <h3>There's no task added. Add one from below</h3>
+    {% else %}
+
+    <table>
+        <tr>
+            <th>Task</th>
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>{{task.content}}</td>
+            <td>{{task.date_created}}</td>
+            <td>
+                <a href="/delete/{{task.id}}">Delete</a>
+                <br>
+                <a href="/update/{{task.id}}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <br>
+    <form class="form" action="/" method="POST">
+        <input class="search-box" type="text" name="content" id="content" placeholder="Tasks here...">
+        <input class="btn" type="submit" value="Add Task">
+    </form>
+</div>
+{% endblock %}
